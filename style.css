@@ -1,0 +1,106 @@
+:root {
+  --blue: #0088cc;
+  --green: #2cbb0f;
+  --pink: #dd00a9;
+  --row-hover: #b9dcff;
+  --row-select: #0074e8;
+  --tree-cell-indent: 0px;
+}
+
+body {
+  font-family: SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,Courier,monospace;
+  font-size: 11px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* キー */
+
+.caret {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  line-height: 16px;
+  font-size: 10px;
+  vertical-align: middle;
+  margin-right: 4px;
+  color: gray;
+}
+
+.objectRow:not(.opened) .caret {
+  transform: rotate(-90deg);
+}
+
+.obj-key {
+  padding-inline-start: var(--tree-cell-indent);
+  color: var(--blue);
+  min-width: 10rem;
+  box-sizing: border-box;
+}
+
+.obj-key::after {
+  content: ":";
+  color: var(--blue);
+}
+
+.objectRow .obj-key .label,  
+.objectRow .obj-key .caret {
+  cursor: pointer;
+}
+
+
+/* 値 */
+.objectRow > .obj-value {
+  color: var(--blue);
+}
+
+.numberRow > .obj-value.number, 
+.booleanRow > .obj-value {
+  color: var(--green)
+}
+.obj-value{
+  color: var(--pink);
+  width: 100%;
+}
+
+.objectRow:has(.opened) .obj-value::after {
+  content: "";
+}
+
+.objectRow:not(.opened) .obj-value::after {
+  content: "{…}";
+}
+
+.stringRow .obj-value::before,
+.stringRow .obj-value::after {
+  content: '"';
+}
+
+/* テーブル */
+table {
+  border-spacing: 0;
+}
+
+.treeRow {
+  line-height: 16px;
+  vertical-align: top;
+}
+
+.treeRow:hover {
+  background-color: var(--row-hover);
+}
+
+.treeRow.selected {
+  background-color: var(--row-select);
+}
+
+.treeRow.hidden {
+  display: none;
+}
+
+
+.treeRow.selected *, 
+.treeRow.selected .obj-value::after,
+.treeRow.selected .obj-key::after {
+  color: white;
+}
